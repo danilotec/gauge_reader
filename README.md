@@ -49,8 +49,8 @@ Você precisa informar:
 Exemplo:
 
 ```
-reader_manometer/runs/detect/train2/weights/best.pt
-reader_manometer/regressor.pt
+gauge_reader/models/best.pt
+gauge_reader/models/regressor.pt
 ```
 
 ---
@@ -60,9 +60,9 @@ reader_manometer/regressor.pt
 ### Exemplo completo
 
 ```python
-from reader_manometer import Manometer, angle_to_percent, get_volume, CropImage, YOLO
+from gauge_reader.reader import Manometer, angle_to_percent, get_volume, CropImage, YOLO
 
-yolo = YOLO("reader_manometer/runs/detect/train2/weights/best.pt")
+yolo = YOLO("gauge_reader/models/best.pt")
 
 def get_crop():
     crop = CropImage(
@@ -76,7 +76,7 @@ def get_crop():
 def get_vol():
     man = Manometer(
         yolo=yolo,
-        regressor="reader_manometer/regressor.pt"
+        regressor="gauge_reader/models/regressor.pt"
     )
 
     angles = man.get_angle(
