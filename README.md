@@ -130,17 +130,17 @@ angles = man.get_angle(filename: str)
 ### `angle_to_percent()`
 
 ```python
-percent = angle_to_percent(angle)
+percent = man.angle_to_percent(angle)
 ```
 
-Converte o ângulo do ponteiro em **porcentagem (0–100%)**, considerando a escala do manômetro.
+Converte o ângulo do ponteiro em **porcentagem (0–1)**, considerando a escala do manômetro.
 
 ---
 
 ### `get_volume()`
 
 ```python
-value = get_volume(percent, max_value)
+value = man.get_volume(max_value)
 ```
 
 Usado para calcular:
