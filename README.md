@@ -60,7 +60,7 @@ gauge_reader/models/regressor.pt
 ### Exemplo completo
 
 ```python
-from gauge_reader.reader import Manometer, angle_to_percent, get_volume, CropImage, YOLO
+from gauge_reader.reader import Manometer, YOLO, CropImage
 
 yolo = YOLO("gauge_reader/models/best.pt")
 
@@ -70,7 +70,7 @@ def get_crop():
         imput_dir='./',
         output_dir='./crops'
     )
-    crop.generate_crop('image2.jpg')
+    crop.generate_crop('image.jpg', 0)
 
 
 def get_vol():
@@ -79,21 +79,15 @@ def get_vol():
         regressor="gauge_reader/models/regressor.pt"
     )
 
-    angles = man.get_angle(
-        filename='./crops/image2_0.jpg'
-    )
-
+    angles = man.get_angle(filename='./crops/image_0.jpg')
 
     if angles:
-        
         print("ângulos:", angles)
-        
-        man_volume = angles[0]
+        print("volume:", round(man.get_real_value(400), 2))
 
-        vol_percent = angle_to_percent(man_volume)
-        print("porcentagem volume:", round(vol_percent, 2))
-
-        print("volume:", round(get_volume(vol_percent, 800), 2))
+if __name__ == '__main__':
+    get_crop()
+    get_vol()
 
 ```
 
